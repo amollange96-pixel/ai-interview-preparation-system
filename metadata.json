@@ -1,0 +1,6 @@
+{
+  "name": "AI Interview Preparation System",
+  "description": "An intelligent, full-stack interview preparation platform that conducts mock interviews with live evaluation and performance analysis.",
+  "requestFramePermissions": ["camera", "microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
