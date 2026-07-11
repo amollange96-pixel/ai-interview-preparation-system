@@ -1,187 +1,544 @@
-# AI Interview Preparation System
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Interview Preparation System</title>
 
-An intelligent interview coach that conducts mock interviews, analyzes candidate responses using ML/NLP, and generates personalized performance feedback — combining speech recognition, NLP, and full-stack development into a single practical application.
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Segoe UI,Arial,sans-serif;
+}
 
-## Overview
+body{
+    background:#f5f7fb;
+    color:#222;
+    line-height:1.7;
+}
 
-This system lets a candidate select a job role and interview type (HR, Technical, or Aptitude), answer questions via voice or text, and receive an AI-generated performance report covering technical relevance, communication, grammar, confidence, and keyword match.
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:40px auto;
+    background:#fff;
+    padding:40px;
+    border-radius:12px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
 
-## Features
+h1{
+    color:#1d4ed8;
+    margin-bottom:10px;
+}
 
-### Candidate Module
-- Login/Signup
-- Select interview type: HR, Technical, Aptitude
-- Select job role: Software Engineer, Data Analyst, AI/ML Engineer, etc.
-- Take a mock interview (voice or text responses)
-- View a detailed performance report
+h2{
+    color:#0f172a;
+    margin-top:35px;
+    margin-bottom:15px;
+    border-left:5px solid #2563eb;
+    padding-left:10px;
+}
 
-### AI Evaluation
-- Speech-to-text conversion (voice answers)
-- Grammar analysis
-- Keyword matching against ideal answers
-- Confidence scoring (optional: facial expression / voice features)
-- Sentiment analysis
-- Speaking speed analysis
-- Combined overall interview score
+h3{
+    margin-top:20px;
+    color:#334155;
+}
 
-### Admin Module
-- Add/edit interview questions
-- Manage users
-- View interview statistics
-- Export reports
+p{
+    margin-bottom:15px;
+}
 
-## Tech Stack
+ul,ol{
+    margin-left:25px;
+    margin-bottom:20px;
+}
 
-| Layer | Technology |
-|---|---|
-| Frontend | React, Tailwind CSS |
-| Backend | FastAPI (or Flask) |
-| Database | PostgreSQL (or MongoDB) |
-| ML/NLP | Python, Scikit-learn, Transformers, Sentence Transformers |
-| Speech | OpenAI Whisper |
-| Vision (optional) | OpenCV, MediaPipe |
+li{
+    margin-bottom:8px;
+}
 
-## Machine Learning Components
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin:20px 0;
+}
 
-| Feature | ML Technique |
-|---|---|
-| Text similarity | Sentence Transformers / BERT embeddings |
-| Answer scoring | Cosine similarity |
-| Sentiment analysis | DistilBERT or RoBERTa |
-| Grammar checking | LanguageTool (or equivalent) |
-| Job role classification | Random Forest / BERT |
-| Speech-to-text | Whisper |
-| Emotion detection (optional) | CNN |
-| Face confidence (optional) | MediaPipe + CNN |
+table th{
+    background:#2563eb;
+    color:white;
+    padding:12px;
+}
 
-## System Workflow
+table td{
+    border:1px solid #ddd;
+    padding:12px;
+}
 
-1. User signs in.
-2. Selects interview type and job role.
-3. AI presents a question.
-4. User responds via voice or text.
-5. Voice is transcribed to text (if applicable).
-6. ML models evaluate the response (similarity, sentiment, grammar, speed, optional confidence).
-7. A score and detailed feedback are generated per question.
-8. Process repeats for all questions in the session.
-9. A final report summarizes strengths and areas for improvement.
+pre{
+    background:#0f172a;
+    color:#f8fafc;
+    padding:18px;
+    overflow:auto;
+    border-radius:8px;
+    margin:20px 0;
+}
 
-## ML Pipeline
+code{
+    font-family:Consolas,monospace;
+}
 
-1. Collect interview questions and reference answers.
-2. Clean and preprocess text.
-3. Convert reference and candidate answers into embeddings via Sentence Transformers.
-4. Score similarity using cosine similarity.
-5. Run sentiment analysis on the response.
-6. Analyze grammar and fluency.
-7. Combine sub-scores into a weighted overall interview rating.
+.badge{
+    display:inline-block;
+    background:#2563eb;
+    color:white;
+    padding:6px 14px;
+    border-radius:20px;
+    margin:5px;
+    font-size:14px;
+}
 
-## Sample Output
+.section{
+    margin-bottom:30px;
+}
 
-```
-Interview Score: 87/100
-Technical Knowledge: 90%
-Communication: 85%
-Grammar: 92%
-Confidence: 80%
-Keyword Match: 88%
+.footer{
+    text-align:center;
+    margin-top:40px;
+    color:#666;
+    font-size:14px;
+}
 
-Suggestions:
-- Give more structured answers.
-- Include practical examples.
-- Reduce filler words.
-```
+@media(max-width:768px){
 
-## Project Structure
+.container{
+padding:20px;
+}
 
-```
-ai-interview-system/
-├── frontend/                 # React + Tailwind app
+table{
+display:block;
+overflow-x:auto;
+}
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h1>🎯 AI Interview Preparation System</h1>
+
+<p>
+An intelligent interview coach that conducts mock interviews, analyzes candidate
+responses using ML/NLP, and generates personalized performance feedback —
+combining speech recognition, NLP, and full-stack development into a single practical application.
+</p>
+
+<div class="section">
+<h2>📖 Overview</h2>
+
+<p>
+This system lets a candidate select a job role and interview type (HR,
+Technical, or Aptitude), answer questions via voice or text, and receive an
+AI-generated performance report covering technical relevance,
+communication, grammar, confidence, and keyword match.
+</p>
+
+</div>
+
+<div class="section">
+
+<h2>✨ Features</h2>
+
+<h3>Candidate Module</h3>
+
+<ul>
+<li>Login / Signup</li>
+<li>Select Interview Type (HR, Technical, Aptitude)</li>
+<li>Select Job Role</li>
+<li>Take Mock Interview (Voice or Text)</li>
+<li>View Detailed Performance Report</li>
+</ul>
+
+<h3>AI Evaluation</h3>
+
+<ul>
+<li>Speech-to-Text Conversion</li>
+<li>Grammar Analysis</li>
+<li>Keyword Matching</li>
+<li>Confidence Scoring</li>
+<li>Sentiment Analysis</li>
+<li>Speaking Speed Analysis</li>
+<li>Overall Interview Score</li>
+</ul>
+
+<h3>Admin Module</h3>
+
+<ul>
+<li>Add/Edit Questions</li>
+<li>Manage Users</li>
+<li>Interview Statistics</li>
+<li>Export Reports</li>
+</ul>
+
+</div>
+
+<div class="section">
+
+<h2>💻 Tech Stack</h2>
+
+<table>
+
+<tr>
+<th>Layer</th>
+<th>Technology</th>
+</tr>
+
+<tr>
+<td>Frontend</td>
+<td>React, Tailwind CSS</td>
+</tr>
+
+<tr>
+<td>Backend</td>
+<td>FastAPI / Flask</td>
+</tr>
+
+<tr>
+<td>Database</td>
+<td>PostgreSQL / MongoDB</td>
+</tr>
+
+<tr>
+<td>ML / NLP</td>
+<td>Python, Scikit-Learn, Transformers, Sentence Transformers</td>
+</tr>
+
+<tr>
+<td>Speech</td>
+<td>OpenAI Whisper</td>
+</tr>
+
+<tr>
+<td>Vision</td>
+<td>OpenCV, MediaPipe (Optional)</td>
+</tr>
+
+</table>
+
+</div>
+
+<div class="section">
+
+<h2>🤖 Machine Learning Components</h2>
+
+<table>
+
+<tr>
+<th>Feature</th>
+<th>ML Technique</th>
+</tr>
+
+<tr>
+<td>Text Similarity</td>
+<td>Sentence Transformers / BERT</td>
+</tr>
+
+<tr>
+<td>Answer Scoring</td>
+<td>Cosine Similarity</td>
+</tr>
+
+<tr>
+<td>Sentiment Analysis</td>
+<td>DistilBERT / RoBERTa</td>
+</tr>
+
+<tr>
+<td>Grammar Checking</td>
+<td>LanguageTool</td>
+</tr>
+
+<tr>
+<td>Job Role Classification</td>
+<td>Random Forest / BERT</td>
+</tr>
+
+<tr>
+<td>Speech Recognition</td>
+<td>OpenAI Whisper</td>
+</tr>
+
+<tr>
+<td>Emotion Detection</td>
+<td>CNN (Optional)</td>
+</tr>
+
+<tr>
+<td>Face Confidence</td>
+<td>MediaPipe + CNN</td>
+</tr>
+
+</table>
+
+</div>
+
+<div class="section">
+
+<h2>🔄 System Workflow</h2>
+
+<ol>
+
+<li>User signs in.</li>
+
+<li>Selects interview type and job role.</li>
+
+<li>AI asks a question.</li>
+
+<li>User answers using voice or text.</li>
+
+<li>Voice responses are converted into text.</li>
+
+<li>ML evaluates similarity, grammar, confidence and sentiment.</li>
+
+<li>Score & feedback generated.</li>
+
+<li>Repeat until interview completes.</li>
+
+<li>Final report is generated.</li>
+
+</ol>
+
+</div>
+
+<div class="section">
+
+<h2>🧠 ML Pipeline</h2>
+
+<ol>
+
+<li>Collect interview questions.</li>
+
+<li>Clean and preprocess text.</li>
+
+<li>Create embeddings using Sentence Transformers.</li>
+
+<li>Compute cosine similarity.</li>
+
+<li>Run sentiment analysis.</li>
+
+<li>Analyze grammar.</li>
+
+<li>Calculate weighted interview score.</li>
+
+</ol>
+
+</div>
+
+<div class="section">
+
+<h2>📊 Sample Output</h2>
+
+<pre><code>Interview Score : 87 / 100
+
+Technical Knowledge : 90%
+
+Communication : 85%
+
+Grammar : 92%
+
+Confidence : 80%
+
+Keyword Match : 88%
+
+Suggestions
+
+• Give more structured answers.
+
+• Include practical examples.
+
+• Reduce filler words.
+</code></pre>
+
+</div>
+
+<div class="section">
+
+<h2>📁 Project Structure</h2>
+
+<pre><code>ai-interview-system/
+│
+├── frontend/
 │   ├── src/
-│   │   ├── components/       # Login, RoleSelector, InterviewSession, ReportView, AdminDashboard
-│   │   ├── pages/
-│   │   └── App.jsx
-│   └── package.json
-├── backend/                  # FastAPI/Flask app
+│   ├── components/
+│   ├── pages/
+│   └── App.jsx
+│
+├── backend/
 │   ├── app/
-│   │   ├── routes/           # auth, questions, sessions, answers, reports, admin
-│   │   ├── models/           # DB schemas (SQLAlchemy / Pydantic)
-│   │   ├── services/         # business logic
-│   │   └── main.py
-│   └── requirements.txt
-├── ml/                        # ML pipeline services
-│   ├── speech_to_text.py     # Whisper integration
-│   ├── embeddings.py         # Sentence Transformers + cosine similarity
-│   ├── sentiment.py          # DistilBERT/RoBERTa sentiment
-│   ├── grammar_check.py      # LanguageTool integration
-│   ├── scoring.py            # weighted score aggregation
-│   └── role_classifier.py    # optional job role classification
+│   ├── routes/
+│   ├── models/
+│   ├── services/
+│   └── main.py
+│
+├── ml/
+│   ├── speech_to_text.py
+│   ├── embeddings.py
+│   ├── sentiment.py
+│   ├── grammar_check.py
+│   ├── scoring.py
+│   └── role_classifier.py
+│
 ├── data/
-│   └── questions_seed.json   # sample question bank
+│   └── questions_seed.json
+│
 └── README.md
-```
+</code></pre>
 
-## Database Schema (high level)
+</div>
 
-- **Users** — id, name, email, password_hash, role (candidate/admin)
-- **Questions** — id, question_text, ideal_answer, required_keywords, difficulty, job_role, interview_type
-- **InterviewSessions** — id, user_id, job_role, interview_type, started_at, completed_at
-- **SessionAnswers** — id, session_id, question_id, raw_text, transcribed_text, similarity_score, sentiment_score, grammar_score, keyword_score, confidence_score
-- **Reports** — id, session_id, overall_score, category_scores (JSON), suggestions
+<div class="section">
 
-## Scoring Formula
+<h2>🗄 Database Schema</h2>
 
-```
-Interview Score = (Technical Knowledge × 0.35)
-                 + (Communication × 0.25)
-                 + (Grammar × 0.20)
-                 + (Confidence × 0.20)
-```
-(Weights are adjustable in `ml/scoring.py`.)
+<ul>
 
-## Getting Started
+<li><strong>Users</strong> – Candidate & Admin information</li>
 
-### Prerequisites
-- Python 3.10+
-- Node.js 18+
-- PostgreSQL 14+ (or MongoDB 6+)
+<li><strong>Questions</strong> – Interview questions with ideal answers</li>
 
-### Backend Setup
-```bash
-cd backend
+<li><strong>Interview Sessions</strong> – Stores interview details</li>
+
+<li><strong>Session Answers</strong> – Candidate responses and scores</li>
+
+<li><strong>Reports</strong> – Final performance reports</li>
+
+</ul>
+
+</div>
+
+<div class="section">
+
+<h2>📈 Interview Scoring Formula</h2>
+
+<pre><code>Interview Score =
+(Technical × 0.35)
++
+(Communication × 0.25)
++
+(Grammar × 0.20)
++
+(Confidence × 0.20)
+</code></pre>
+
+</div>
+
+<div class="section">
+
+<h2>🚀 Getting Started</h2>
+
+<h3>Prerequisites</h3>
+
+<ul>
+
+<li>Python 3.10+</li>
+
+<li>Node.js 18+</li>
+
+<li>PostgreSQL 14+</li>
+
+</ul>
+
+<h3>Backend Setup</h3>
+
+<pre><code>cd backend
+
 python -m venv venv
-source venv/bin/activate      # Windows: venv\Scripts\activate
+
+source venv/bin/activate
+
 pip install -r requirements.txt
+
 uvicorn app.main:app --reload
-```
+</code></pre>
 
-### Frontend Setup
-```bash
-cd frontend
+<h3>Frontend Setup</h3>
+
+<pre><code>cd frontend
+
 npm install
+
 npm run dev
-```
+</code></pre>
 
-### Environment Variables
-Create a `.env` file in `backend/` with:
-```
-DATABASE_URL=postgresql://user:password@localhost:5432/interview_db
+<h3>Environment Variables</h3>
+
+<pre><code>DATABASE_URL=postgresql://user:password@localhost:5432/interview_db
+
 JWT_SECRET=your_secret_key
+
 WHISPER_MODEL=base
-```
+</code></pre>
 
-## Roadmap / Advanced Features
-- [ ] Adaptive questions based on previous answers
-- [ ] AI-generated follow-up questions
-- [ ] Coding interview mode with automatic code evaluation
-- [ ] Resume upload with tailored questions
-- [ ] Job description upload for role-specific interviews
-- [ ] Personalized learning plan after each interview
-- [ ] Progress-tracking dashboard across sessions
+</div>
 
-## Skills Demonstrated
-Machine Learning · Natural Language Processing (NLP) · Speech Recognition · Python · FastAPI/Flask · React · Model Evaluation · Database Design · API Development
+<div class="section">
 
-## License
-Add your preferred license here (e.g., MIT).
+<h2>🛣 Roadmap</h2>
 
+<ul>
+
+<li>Adaptive Interview Questions</li>
+
+<li>AI Follow-up Questions</li>
+
+<li>Coding Interview Mode</li>
+
+<li>Resume Upload</li>
+
+<li>Job Description Upload</li>
+
+<li>Learning Plan Generator</li>
+
+<li>Progress Dashboard</li>
+
+</ul>
+
+</div>
+
+<div class="section">
+
+<h2>🏆 Skills Demonstrated</h2>
+
+<span class="badge">Machine Learning</span>
+<span class="badge">NLP</span>
+<span class="badge">Speech Recognition</span>
+<span class="badge">FastAPI</span>
+<span class="badge">React</span>
+<span class="badge">Python</span>
+<span class="badge">Database Design</span>
+<span class="badge">API Development</span>
+
+</div>
+
+<div class="section">
+
+<h2>📜 License</h2>
+
+<p>MIT License (Recommended)</p>
+
+</div>
+
+<div class="footer">
+
+Made with ❤️ for AI Interview Preparation System
+
+</div>
+
+</div>
+
+</body>
+</html>
